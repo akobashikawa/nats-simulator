@@ -1,9 +1,12 @@
 import { ref } from 'vue';
 import Timer from './Timer.js';
+import ClientesList from './ClientesList.js';
+import Cliente from './Cliente.js';
 
 const App = {
   components: {
     Timer,
+    ClientesList,
   },
 
   template: `
@@ -14,12 +17,21 @@ const App = {
     <button @click="continueTimer" :disabled="!isPaused">Continuar</button>
     <button @click="stop" :disabled="!isRunning">Terminar</button>
     <Timer v-if="isRunning" ref="timerComponent" />
+
+    <hr>
+
+    <main v-if="isRunning">
+      <button @click="createCliente" :disabled="isPaused">Crear Cliente</button>
+
+      <ClientesList :customers="customers" />
+    </main>
   `,
 
   setup() {
     const isRunning = ref(false);
     const isPaused = ref(false);
     const timerComponent = ref(null);
+    const customers = ref([]);
 
     function start() {
       console.log('start');
@@ -45,6 +57,11 @@ const App = {
       timerComponent.value.continueTimer();
     }
 
+    function createCliente() {
+      const newCliente = Cliente.create();
+      customers.value.push(newCliente);
+    }
+
     return {
       isRunning,
       isPaused,
@@ -52,7 +69,9 @@ const App = {
       stop,
       pause,
       continueTimer,
+      createCliente,
       timerComponent,
+      customers,
     };
   },
 };

@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const Timer = {
   template: `
     <div>
-      <p>Tiempo: {{ hours }}:{{ minutes }}:{{ seconds }}</p>
+      <p>Tiempo: {{ formatTime(hours) }}:{{ formatTime(minutes) }}:{{ formatTime(seconds) }}</p>
     </div>
   `,
 
@@ -42,6 +42,10 @@ const Timer = {
       isPaused.value = false;
     }
 
+    function formatTime(value) {
+      return value.toString().padStart(2, '0');
+    }
+
     onMounted(() => {
       startTimer();
     });
@@ -56,6 +60,7 @@ const Timer = {
       seconds,
       pauseTimer,
       continueTimer,
+      formatTime,
     };
   },
 };
