@@ -9,10 +9,10 @@ const App = {
   template: `
     <h1>Simulator</h1>
 
-    <button @click="start" v-if="!isRunning">Iniciar</button>
-    <button @click="pause" v-if="isRunning">Pausar</button>
-    <button @click="continueTimer" v-if="isPaused">Continuar</button>
-    <button @click="stop" v-if="isRunning">Terminar</button>
+    <button @click="start" :disabled="isRunning">Iniciar</button>
+    <button @click="pause" :disabled="!isRunning || isPaused">Pausar</button>
+    <button @click="continueTimer" :disabled="!isPaused">Continuar</button>
+    <button @click="stop" :disabled="!isRunning">Terminar</button>
     <Timer v-if="isRunning" ref="timerComponent" />
   `,
 
