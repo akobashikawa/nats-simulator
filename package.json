@@ -1,0 +1,15 @@
+{
+  "name": "nats-hello",
+  "version": "1.0.0",
+  "description": "Para probar conceptos de nats",
+  "license": "MIT",
+  "author": "Antonio Kobashikawa",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
