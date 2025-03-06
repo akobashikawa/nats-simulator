@@ -1,11 +1,22 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+const axios = require('axios');
 
-app.get('/', (req, res) => {
-  res.send('Cliente app');
-});
+class Cliente {
+  constructor(id, nombre) {
+    this.id = id;
+    this.nombre = nombre;
+  }
 
-app.listen(port, () => {
-  console.log(`cliente app funcionando en http://localhost:${port}`);
-});
+  hola() {
+    return 'hola';
+  }
+
+  static create() {
+    const id = Math.random().toString(36).substr(2, 3); // Genera un ID al azar
+    const nombre = `Cliente ${id}`;
+    return new Cliente(id, nombre);
+  }
+
+  
+}
+
+module.exports = Cliente;
