@@ -28,6 +28,13 @@ app.post('/clientes', async (req, res) => {
     res.send(result);
 });
 
+app.delete('/clientes/:id', async (req, res) => {
+  console.log('delete cliente');
+    const { id } = req.params;
+    await clientesService.deleteCliente(id);
+    res.send({ message: 'Cliente eliminado' });
+});
+
 // Middleware para manejar rutas no existentes
 app.use((req, res, next) => {
   res.status(404).send('URL no encontrada');

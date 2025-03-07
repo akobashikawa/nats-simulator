@@ -1,9 +1,9 @@
 const axios = require('axios');
-const Cliente = require('./cliente');
+const ClientesRepository = require('./clientes-repository');
 
-class ClienteService {
-  constructor(id, nombre) {
-    this.clientes = [];
+class ClientesService {
+  constructor() {
+    this.clientesRepository = new ClientesRepository();
   }
 
   hola() {
@@ -11,25 +11,16 @@ class ClienteService {
   }
 
   async getClientes() {
-    return this.clientes;
+    return this.clientesRepository.getAll();
   }
 
   async createCliente() {
-    const nuevoCliente = Cliente.create();
-    this.clientes.push(nuevoCliente);
-    return nuevoCliente;
+    return this.clientesRepository.create();
   }
 
-  async pide(message) {
-    const url = `${cajeroUrlbase}/quiero`;
-    try {
-      const response = await axios.get(url, { params: { message } });
-      const result = response.data;
-      return result;
-    } catch (error) {
-      console.log(error);
-    }
+  async deleteCliente(id) {
+    this.clientesRepository.delete(id);
   }
 }
 
-module.exports = ClienteService;
+module.exports = ClientesService;

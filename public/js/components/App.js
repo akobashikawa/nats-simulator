@@ -5,12 +5,12 @@ import ClientesService from './ClientesService.js';
 const clientesService = new ClientesService();
 
 const App = {
-	components: {
-		Timer,
-		ClientesList,
-	},
+  components: {
+    Timer,
+    ClientesList,
+  },
 
-	template: `
+  template: `
     <h1>Simulator</h1>
 
     <button @click="start" :disabled="isRunning">Iniciar</button>
@@ -25,70 +25,78 @@ const App = {
       <button @click="getClientes" :disabled="isPaused">Listar Clientes</button>
       <button @click="createCliente" :disabled="isPaused">Crear Cliente</button>
 
-      <ClientesList :clientes="clientes" />
+      <ClientesList :clientes="clientesList" @delete-cliente="deleteCliente" />
     </main>
   `,
 
-	setup() {
-		const isRunning = ref(false);
-		const isPaused = ref(false);
-		const timerComponent = ref(null);
-		const clientes = ref([]);
+  setup() {
+    const isRunning = ref(false);
+    const isPaused = ref(false);
+    const timerComponent = ref(null);
+    const clientes = ref([]);
 
-		onMounted(async () => {
-			await getClientes();
-		});
+    onMounted(async () => {
+      await getClientes();
+    });
 
-		function start() {
-			console.log('start');
-			isRunning.value = true;
-			isPaused.value = false;
-		}
+    function start() {
+      console.log('start');
+      isRunning.value = true;
+      isPaused.value = false;
+    }
 
-		function stop() {
-			console.log('stop');
-			isRunning.value = false;
-			isPaused.value = false;
-		}
+    function stop() {
+      console.log('stop');
+      isRunning.value = false;
+      isPaused.value = false;
+    }
 
-		function pause() {
-			console.log('pause');
-			isPaused.value = true;
-			timerComponent.value.pauseTimer();
-		}
+    function pause() {
+      console.log('pause');
+      isPaused.value = true;
+      timerComponent.value.pauseTimer();
+    }
 
-		function continueTimer() {
-			console.log('continue');
-			isPaused.value = false;
-			timerComponent.value.continueTimer();
-		}
+    function continueTimer() {
+      console.log('continue');
+      isPaused.value = false;
+      timerComponent.value.continueTimer();
+    }
 
-		async function getClientes() {
-			console.log('getClientes');
-			const loadedClientes = await clientesService.getClientes();
-			clientes.value = loadedClientes;
-		}
+    async function getClientes() {
+      console.log('getClientes');
+      const loadedClientes = await clientesService.getClientes();
+      clientes.value = loadedClientes;
+    }
 
-		async function createCliente() {
-			console.log('createCliente');
-			await clientesService.createCliente();
-			await getClientes();
-		}
+    async function createCliente() {
+      console.log('createCliente');
+      await clientesService.createCliente();
+      await getClientes();
+    }
 
+    async function deleteCliente(id) {
+      console.log('deleteCliente', id);
+      await clientesService.deleteCliente(id);
+      await getClientes();
+    }
 
-		return {
-			isRunning,
-			isPaused,
-			start,
-			stop,
-			pause,
-			continueTimer,
-			getClientes,
-			createCliente,
-			timerComponent,
-			clientes,
-		};
-	},
+    const clientesList = computed(() => clientes.value);
+
+    return {
+      isRunning,
+      isPaused,
+      start,
+      stop,
+      pause,
+      continueTimer,
+      getClientes,
+      createCliente,
+      deleteCliente,
+      timerComponent,
+      clientesList,
+    };
+  },
 };
 
 export default App;
