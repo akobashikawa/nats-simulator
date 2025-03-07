@@ -2,6 +2,8 @@ import { ref, onMounted, computed } from 'vue';
 import Timer from './Timer.js';
 import ClientesList from './ClientesList.js';
 import ClientesService from './ClientesService.js';
+import { log } from '../utils/logger.js'; // Importa la función de registro condicional
+
 const clientesService = new ClientesService();
 
 const App = {
@@ -40,43 +42,43 @@ const App = {
     });
 
     function start() {
-      console.log('start');
+      log('start');
       isRunning.value = true;
       isPaused.value = false;
     }
 
     function stop() {
-      console.log('stop');
+      log('stop');
       isRunning.value = false;
       isPaused.value = false;
     }
 
     function pause() {
-      console.log('pause');
+      log('pause');
       isPaused.value = true;
       timerComponent.value.pauseTimer();
     }
 
     function continueTimer() {
-      console.log('continue');
+      log('continue');
       isPaused.value = false;
       timerComponent.value.continueTimer();
     }
 
     async function getClientes() {
-      console.log('getClientes');
+      log('getClientes');
       const loadedClientes = await clientesService.getClientes();
       clientes.value = loadedClientes;
     }
 
     async function createCliente() {
-      console.log('createCliente');
+      log('createCliente');
       await clientesService.createCliente();
       await getClientes();
     }
 
     async function deleteCliente(id) {
-      console.log('deleteCliente', id);
+      log('deleteCliente', id);
       await clientesService.deleteCliente(id);
       await getClientes();
     }
