@@ -1,8 +1,10 @@
 const Cliente = require('./cliente');
+const RepositoryInterface = require('./repository-interface');
 const logger = require('./logger');
 
-class ClientesRepository {
+class ClientesRepository extends RepositoryInterface {
   constructor() {
+    super();
     this.clientes = [];
   }
 
