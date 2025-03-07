@@ -2,15 +2,15 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 export default {
   props: {
-    customers: {
+    clientes: {
       type: Array,
       required: true,
     },
   },
   template: `
     <ul>
-      <li v-for="customer in customers" :key="customer.id">
-        {{ customer.name }}
+      <li v-for="cliente in clientes" :key="cliente.id">
+        {{ cliente.nombre }}
       </li>
     </ul>
   `,
