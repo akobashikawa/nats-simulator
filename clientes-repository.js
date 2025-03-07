@@ -7,7 +7,7 @@ class ClientesRepository {
   }
 
   async getAll() {
-    logger.info('memory getAll method called');
+    logger.info('memory getAll llamado');
     return this.clientes;
   }
 

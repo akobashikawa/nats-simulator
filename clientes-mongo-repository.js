@@ -7,7 +7,7 @@ class MongoRepository extends RepositoryInterface {
     try {
       return await Cliente.find();
     } catch (err) {
-      logger.error('Error fetching clients', err);
+      logger.error('Error trayendo clientes', err);
       throw err;
     }
   }
@@ -18,7 +18,7 @@ class MongoRepository extends RepositoryInterface {
       await nuevoCliente.save();
       return nuevoCliente;
     } catch (err) {
-      logger.error('Error creating client', err);
+      logger.error('Error creando cliente', err);
       throw err;
     }
   }
@@ -27,7 +27,7 @@ class MongoRepository extends RepositoryInterface {
     try {
       await Cliente.deleteOne({ id });
     } catch (err) {
-      logger.error('Error deleting client', err);
+      logger.error('Error eliminando cliente', err);
       throw err;
     }
   }

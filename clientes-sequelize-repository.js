@@ -7,7 +7,7 @@ class SequelizeRepository extends RepositoryInterface {
     try {
       return await Cliente.findAll();
     } catch (err) {
-      logger.error('Error fetching clients', err);
+      logger.error('Error trayendo clientes', err);
       throw err;
     }
   }
@@ -18,7 +18,7 @@ class SequelizeRepository extends RepositoryInterface {
       await nuevoCliente.save();
       return nuevoCliente;
     } catch (err) {
-      logger.error('Error creating client', err);
+      logger.error('Error creando cliente', err);
       throw err;
     }
   }
@@ -27,7 +27,7 @@ class SequelizeRepository extends RepositoryInterface {
     try {
       await Cliente.destroy({ where: { id } });
     } catch (err) {
-      logger.error('Error deleting client', err);
+      logger.error('Error eliminado cliente', err);
       throw err;
     }
   }
