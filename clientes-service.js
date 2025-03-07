@@ -15,9 +15,12 @@ class ClientesService {
     return this.repository.getAll();
   }
 
-  async createCliente() {
+  async createCliente(data) {
     logger.info('createCliente method called');
-    return this.repository.create();
+    const id = data.id || Math.random().toString(36).substr(2, 3); // Genera un ID al azar
+    const nombre = data.nombre || `Cliente ${id}`;
+    logger.info(`id: ${id}, nombre: ${nombre}`);
+    return this.repository.create({ id, nombre });
   }
 
   async deleteCliente(id) {

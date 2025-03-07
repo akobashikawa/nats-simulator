@@ -10,9 +10,7 @@ class Cliente {
     return 'hola';
   }
 
-  static create() {
-    const id = Math.random().toString(36).substr(2, 3); // Genera un ID al azar
-    const nombre = `Cliente ${id}`;
+  static create(data) {
     return new Cliente(id, nombre);
   }
 

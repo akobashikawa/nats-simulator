@@ -13,8 +13,8 @@ class ClientesRepository extends RepositoryInterface {
     return this.clientes;
   }
 
-  async create() {
-    const nuevoCliente = Cliente.create();
+  async create(data) {
+    const nuevoCliente = Cliente.create(data);
     this.clientes.push(nuevoCliente);
     return nuevoCliente;
   }
