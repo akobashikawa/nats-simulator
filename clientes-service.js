@@ -1,26 +1,28 @@
-const axios = require('axios');
-const ClientesRepository = require('./clientes-repository');
 const logger = require('./logger');
 
 class ClientesService {
-  constructor() {
-    this.clientesRepository = new ClientesRepository();
+  constructor(repository) {
+    this.repository = repository;
   }
 
   hola() {
+    logger.info('hola method called');
     return 'hola';
   }
 
   async getClientes() {
-    return this.clientesRepository.getAll();
+    logger.info('getClientes method called');
+    return this.repository.getAll();
   }
 
   async createCliente() {
-    return this.clientesRepository.create();
+    logger.info('createCliente method called');
+    return this.repository.create();
   }
 
   async deleteCliente(id) {
-    this.clientesRepository.delete(id);
+    logger.info(`deleteCliente method called with id: ${id}`);
+    return this.repository.delete(id);
   }
 }
 

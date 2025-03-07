@@ -6,17 +6,18 @@ class ClientesRepository {
     this.clientes = [];
   }
 
-  getAll() {
+  async getAll() {
+    logger.info('memory getAll method called');
     return this.clientes;
   }
 
-  create() {
+  async create() {
     const nuevoCliente = Cliente.create();
     this.clientes.push(nuevoCliente);
     return nuevoCliente;
   }
 
-  delete(id) {
+  async delete(id) {
     this.clientes = this.clientes.filter(cliente => cliente.id !== id);
   }
 }
