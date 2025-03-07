@@ -1,9 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const logger = require('./logger');
 
 const name = 'clientes server';
-const port = 3010;
+const port = process.env.CLIENTES_PORT || 3010;
+
 const ClientesService = require('./clientes-service');
 const clientesService = new ClientesService();
 
@@ -29,7 +31,7 @@ app.post('/clientes', async (req, res) => {
 });
 
 app.delete('/clientes/:id', async (req, res) => {
-  console.log('delete cliente');
+    logger.info(`delete cliente ${req.params.id}`);
     const { id } = req.params;
     await clientesService.deleteCliente(id);
     res.send({ message: 'Cliente eliminado' });
@@ -41,5 +43,5 @@ app.use((req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log(`${name} app funcionando en http://localhost:${port}`);
+  logger.info(`${name} app funcionando en http://localhost:${port}`);
 });

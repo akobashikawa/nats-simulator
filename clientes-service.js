@@ -1,5 +1,6 @@
 const axios = require('axios');
 const ClientesRepository = require('./clientes-repository');
+const logger = require('./logger');
 
 class ClientesService {
   constructor() {

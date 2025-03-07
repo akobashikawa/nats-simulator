@@ -1,4 +1,5 @@
 const Cliente = require('./cliente');
+const logger = require('./logger');
 
 class ClientesRepository {
   constructor() {

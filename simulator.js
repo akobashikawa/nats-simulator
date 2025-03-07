@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const logger = require('./logger');
+
 const name = 'simulator';
-const port = 3000;
+const port = process.env.SIMULATOR_PORT || 3000;
 
 // Middleware para parsear JSON
 app.use(express.json());
@@ -21,5 +23,5 @@ app.use((req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log(`${name} app funcionando en http://localhost:${port}`);
+  logger.info(`${name} app funcionando en http://localhost:${port}`);
 });
