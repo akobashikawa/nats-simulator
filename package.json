@@ -1,5 +1,5 @@
 {
-  "name": "nats-hello",
+  "name": "nats-simulator",
   "version": "1.0.0",
   "description": "Para probar conceptos de nats",
   "license": "MIT",
