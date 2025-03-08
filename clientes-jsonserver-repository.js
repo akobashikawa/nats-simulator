@@ -5,7 +5,7 @@ const logger = require('./logger');
 class JsonServerRepository extends RepositoryInterface {
   constructor() {
     super();
-    this.baseUrl = 'http://localhost:4010/clientes';
+    this.baseUrl = `${process.env.JSONSERVER_URL}/clientes`;
   }
 
   async getAll() {
