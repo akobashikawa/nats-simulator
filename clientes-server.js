@@ -1,23 +1,20 @@
 const express = require('express');
-const cors = require('cors');
 const app = express();
-const logger = require('./logger'); // Importa el logger configurado
+
 const config = require('./config'); // Importa la configuración
+const logger = require('./logger'); // Importa el logger configurado
+const ClientesRepositoryFactory = require('./clientes-repository-factory'); // Importa la fábrica de repositorios
 
 const name = 'clientes server';
 const port = process.env.CLIENTES_PORT || 3010;
 
-let repository;
-if (config.repository === 'memory') {
-  repository = new (require('./clientes-repository'))(); // Usa ClientesRepository en memoria
-} else if (config.repository === 'jsonserver') {
-  repository = new (require('./clientes-jsonserver-repository'))(); // Usa JsonServerRepository
-}
+const repository = ClientesRepositoryFactory.createRepository(); // Usa la fábrica para crear el repositorio
 
 const ClientesService = require('./clientes-service');
 const clientesService = new ClientesService(repository);
 
 // Middleware para habilitar CORS
+const cors = require('cors');
 app.use(cors());
 
 // Middleware para parsear JSON

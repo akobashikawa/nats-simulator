@@ -2,7 +2,7 @@ const Cliente = require('./cliente');
 const RepositoryInterface = require('./repository-interface');
 const logger = require('./logger');
 
-class ClientesRepository extends RepositoryInterface {
+class ClientesMemoryRepository extends RepositoryInterface {
   constructor() {
     super();
     this.clientes = [];
@@ -24,4 +24,4 @@ class ClientesRepository extends RepositoryInterface {
   }
 }
 
-module.exports = ClientesRepository;
+module.exports = ClientesMemoryRepository;
